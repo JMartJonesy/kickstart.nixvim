@@ -1,16 +1,11 @@
 { config, pkgs, inputs, ... }:
 
 {
-  # https://nix-community.github.io/nixvim/plugins/gitsigns/index.html
-  #
-  # Adds git related signs to the gutter, as well as utilities for managing changes
   programs.nixvim = {
-    plugins.gitsigns = { # Adds git related signs to the gutter, as well as utilities for managing changes
-      # Here is a more advanced example where we pass configuration
-      # options to `gitsigns.nvim`. This is equivalent to the following lua:
-      #    require("gitsigns").setup({ ... })
-      #
-      # See `:help gitsigns` to understand what the configuration keys do
+    # Adds git related signs to the gutter, as well as utilities for managing changes
+    # See `:help gitsigns` to understand what the configuration keys do
+    # https://nix-community.github.io/nixvim/plugins/gitsigns/index.html
+    plugins.gitsigns = {
       enable = true;
       settings = {
 	signs = {
@@ -23,8 +18,9 @@
       };
     };
 
-    # add gitsigns recommended keymaps
+    # NOTE: add gitsigns recommended keymaps if you are interested
     /*
+    # https://nix-community.github.io/nixvim/keymaps/index.html
     keymaps = [
       # Navigation
       {

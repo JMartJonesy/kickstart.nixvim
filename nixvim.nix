@@ -12,18 +12,18 @@
     ./plugins/nvim-cmp.nix
     ./plugins/mini.nix
     ./plugins/treesitter.nix
-    # NOTE: Next step on your Neovim jouney: Add/Configure additional plugins for Kickstart
+    ./plugins/kickstart/health.nix
+    # NOTE: Add/Configure additional plugins for Kickstart.nixvim
     #
     #  Here are some example plugins that I've included in the Kickstart repository.
     #  Uncomment any of the lines below to enable them (you will need to restart nvim).
     #
-    ./plugins/kickstart/health.nix
     # ./plugins/kickstart/plugins/debug.nix
     # ./plugins/kickstart/plugins/indent-blankline.nix
     # ./plugins/kickstart/plugins/lint.nix
     # ./plugins/kickstart/plugins/autopairs.nix
     # ./plugins/kickstart/plugins/neo-tree.nix
-    # NOTE: Next step add and configure your own plugins see https://nix-community.github.io/nixvim/
+    # NOTE: Configure your own plugins `see https://nix-community.github.io/nixvim/`
     # Add your plugins to ./plugins/custom/plugins and import them below
   ];
 
@@ -35,7 +35,7 @@
   ========         .----------------------.   | === |          ========
   ========         |.-""""""""""""""""""-.|   |-----|          ========
   ========         ||                    ||   | === |          ========
-  ========         ||   KICKSTART.NVIM   ||   |-----|          ========
+  ========         ||  KICKSTART.NIXVIM  ||   |-----|          ========
   ========         ||                    ||   | === |          ========
   ========         ||                    ||   |-----|          ========
   ========         ||:Tutor              ||   |:::::|          ========
@@ -48,28 +48,21 @@
   =====================================================================
   =====================================================================
 
-  What is Kickstart?
+  What is Kickstart.nixvim?
 
-    Kickstart.nvim is *not* a distribution.
-
-    Kickstart.nvim is a starting point for your own configuration.
+    Kickstart.nixvim is a starting point for your own configuration.
       The goal is that you can read every line of code, top-to-bottom, understand
       what your configuration is doing, and modify it to suit your needs.
 
       Once you've done that, you can start exploring, configuring and tinkering to
-      make Neovim your own! That might mean leaving Kickstart just the way it is for a while
-      or immediately breaking it into modular pieces. It's up to you!
+      make Neovim your own!
 
-      If you don't know anything about Lua, I recommend taking some time to read through
-      a guide. One possible example which will only take 10-15 minutes:
+      If you don't know anything about Nixvim, Nix or Lua, I recommend taking some time to read through.
+        - https://nix-community.github.io/nixvim/
+        - https://learnxinyminutes.com/docs/nix/
         - https://learnxinyminutes.com/docs/lua/
 
-      After understanding a bit more about Lua, you can use `:help lua-guide` as a
-      reference for how Neovim integrates Lua.
-      - :help lua-guide
-      - (or HTML version): https://neovim.io/doc/user/lua-guide.html
-
-  Kickstart Guide:
+  Kickstart.nixvim Guide:
 
     TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
@@ -82,7 +75,7 @@
       (If you already know the Neovim basics, you can skip this step.)
 
     Once you've completed that, you can continue working through **AND READING** the rest
-    of the kickstart init.lua.
+    of the nixvim.nix.
 
     Next, run AND READ `:help`.
       This will open up a help window with some basic information
@@ -94,20 +87,20 @@
       MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
       which is very useful when you're not exactly sure of what you're looking for.
 
-    I have left several `:help X` comments throughout the init.lua
+    I have left several `:help X` comments throughout the nixvim.nix and the plugin .nix files
       These are hints about where to find more information about the relevant settings,
-      plugins or Neovim features used in Kickstart.
+      plugins or Neovim features used in Kickstart.nixvim.
 
      NOTE: Look for lines like this
 
       Throughout the file. These are for you, the reader, to help you understand what is happening.
       Feel free to delete them once you know what you're doing, but they should serve as a guide
-      for when you are first encountering a few different constructs in your Neovim config.
+      for when you are first encountering a few different constructs in your Nixvim Neovim config.
 
   If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
 
   I hope you enjoy your Neovim journey,
-  - TJ
+  - JMartJonesy
 
   P.S. You can delete this when you're done too. It's your config now! :)
   */
@@ -117,23 +110,25 @@
 
     # You can easily change to a different colorscheme.
     # Add your colorscheme here and enable it.
+    # Don't forget to disable the colorschemes you arent using
     #
     # If you want to see what colorschemes are already installed, you can use `:Telescope colorschme`.
     colorschemes = {
+      # https://nix-community.github.io/nixvim/colorschemes/tokyonight/index.html
       tokyonight = {
         enable = true;
         settings = {
-	  # Like many other themes, this one has different styles, and you could load
-	  # any other, such as 'storm', 'moon', or 'day'.
+          # Like many other themes, this one has different styles, and you could load
+          # any other, such as 'storm', 'moon', or 'day'.
           style = "night";
         };
       };
     };
 
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=globals#globals
     globals = {
       # Set <space> as the leader key
       # See `:help mapleader`
-      #TODO: Confirm this NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
       mapleader = " ";
       maplocalleader = " ";
 
@@ -145,8 +140,9 @@
     # See `:help vim.opt`
     # NOTE: You can change these options as you wish!
     #  For more options, you can see `:help option-list`
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=globals#opts
     opts = {
-      # Make line numbers default
+      # Show line numbers
       number = true;
       # You can also add relative line numbers, to help with jumping.
       #  Experiment for yourself to see if you like it!
@@ -155,7 +151,7 @@
       # Enable mouse mode, can be useful for resizing splits for example!
       mouse = "a";
 
-      # Don't show the mode, since it's already in the status line
+      # Don't show the mode, since it's already in the statusline
       showmode = false;
 
       # Sync clipboard between OS and Neovim
@@ -191,6 +187,7 @@
       #  See `:help 'list'`
       #  See `:help 'listchars'`
       list = true;
+      # NOTE: .__raw here means that this field is raw lua code
       listchars.__raw = "{ tab = '» ', trail = '·', nbsp = '␣' }";
 
       # Preview subsitutions live, as you type!
@@ -208,6 +205,7 @@
 
     # [[ Basic Keymaps ]]
     #  See `:help vim.keymap.set()`
+    # https://nix-community.github.io/nixvim/keymaps/index.html
     keymaps = [
       {
         mode = "n";
@@ -218,7 +216,7 @@
       # for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
       # is not what someone will guess without a bit more experience.
       #
-      # NOTE: This won't work in all terminal emulators/tmus/etc. Try your own mapping
+      # NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
       # or just use <C-\><C-n> to exit terminal mode
       {
         mode = "t";
@@ -288,13 +286,17 @@
         };
       }
     ];
+
+    # https://nix-community.github.io/nixvim/NeovimOptions/autoGroups/index.html
     autoGroups = {
       kickstart-highlight-yank = {
         clear = true;
       };
     };
+
     # [[ Basic Autocommands ]]
     #  See `:help lua-guide-autocommands`
+    # https://nix-community.github.io/nixvim/NeovimOptions/autoCmd/index.html
     autoCmd = [
       # Highlight when yanking (copying) text
       #  Try it with `yap` in normal mode
@@ -310,82 +312,37 @@
         '';
       }
     ];
+
+
     plugins = {
-      # [[ Install `lazy.nvim` plugin manager ]]
-      #  See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
-#      lazy = {
-#        enable = true;
-	# [[ Configure and install plugins ]]
-	#
-	#  To check the current status of your plugins, run
-	#    :Lazy
-	#
-	#  You can press `?` in this menu for help. Use `:q` to close the window
-	#
-	#  To update plugins you can run
-	#    :Lazy update
-	#
-	# NOTE: Here is where you install your plugins.
-  # TODO: Probably remove LAZY
-#        plugins = [
-#        ];
-#      };
-
-      # NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-      sleuth = { # Detect tabstop and shiftwidth automatically
+      # Detect tabstop and shiftwidth automatically
+      # https://nix-community.github.io/nixvim/plugins/sleuth/index.html
+      sleuth = {
         enable = true;
       };
 
-      # NOTE: Plugins can also be added by using a table,
-      # with the first argument being the link and the following
-      # keys can be used to configure plugin behavior/loading/etc.
-      # 
-      # Use `opts = {}` to force a plugin to be loaded.
-      #
-      #  This is equivalent to:
-      #    require('Comment').setup({})
-      #
-      comment = { # "gc" to comment visual regions/lines
+      # "gc" to comment visual regions/lines
+      # https://nix-community.github.io/nixvim/plugins/comment/index.html
+      comment = {
         enable = true;
       };
 
-
-      # NOTE: Plugins can also be configured to run Lua code when they are loaded.
-      #
-      # This is often very useful to both group configuration, as well as handle
-      # lazy loading plugins that don't need to be loaded immediately at startup.
-      # 
-      # For example, in the following configuration, we use:
-      #  event = "VimEnter"
-      #
-      # which loads which-key before all the UI elements are loaded. Events can be
-      # normal autocommands event (`:help autocmd-event`).
-      #
-      # Then because we use the `config` key, the configuration only runs
-      # after the plugin has been loaded:
-      #  config = function() ... end
-
-
-      # NOTE: Plugins can specify dependencies.
-      #
-      # The dependencies are proper plugin specifications as well - anything
-      # you do for a plugin at the top level, you can do for a dependency.
-      #
-      # Use the `dependencies` key to specify the dependencies of a particular plugin
-
-      todo-comments = { # Highlight todo, notes, etc in comments
+      # Highlight todo, notes, etc in comments
+      # https://nix-community.github.io/nixvim/plugins/todo-comments/index.html
+      todo-comments = {
         enable = true;
         signs = true;
       };
-
     };
 
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraplugins
     extraPlugins = with pkgs.vimPlugins; [
       # Useful for getting pretty icons, but requires a Nerd Font.
       nvim-web-devicons # TODO: Figure out how to configure using this with telescope
     ];
 
     # TODO: Figure out where to move this
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraconfigluapre
     extraConfigLuaPre = ''
       if vim.g.have_nerd_font then
         require('nvim-web-devicons').setup {}
@@ -393,6 +350,7 @@
     '';
 
     # The line beneath this is called `modeline`. See `:help modeline`
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraconfigluapost
     extraConfigLuaPost = ''
       -- vim: ts=2 sts=2 sw=2 et
     '';

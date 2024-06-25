@@ -3,12 +3,16 @@
 {
   programs.nixvim = {
     # Dependencies
+    #
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extrapackages
     extraPackages = with pkgs; [
       # Used to format Lua code
       stylua
     ];
 
-    plugins.conform-nvim = { # Autoformat
+    # Autoformat
+    # https://nix-community.github.io/nixvim/plugins/conform-nvim.html
+    plugins.conform-nvim = {
       enable = true;
       notifyOnError = false;
       formatOnSave = ''
@@ -34,6 +38,7 @@
       };
     };
 
+    # https://nix-community.github.io/nixvim/keymaps/index.html
     keymaps = [
       {
         mode = "";

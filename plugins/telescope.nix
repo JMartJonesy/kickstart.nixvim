@@ -2,7 +2,9 @@
 
 {
   programs.nixvim = {
-    plugins.telescope = { # Fuzzy Finder (files, lsp, etc)
+    # Fuzzy Finder (files, lsp, etc)
+    # https://nix-community.github.io/nixvim/plugins/telescope/index.html
+    plugins.telescope = {
       # Telescope is a fuzzy finder that comes with a lot of different things that
       # it can fuzzy find! It's more than just a "file finder", it can search
       # many different aspects of Neovim, your workspace, LSP, and more!
@@ -25,21 +27,14 @@
       # [[ Configure Telescope ]]
       # See `:help telescope` and `:help telescope.setup()`
       enable = true;
+
       # Enable Telescope extensions
       extensions = {
 	fzf-native.enable = true;
 	ui-select.enable = true;
       };
+
       # You can put your default mappings / updates / etc. in here
-      #  All the info you're looking for is in `:help telescope.setup()`
-      #
-      # defaults = {
-      #   mappings = {
-      #     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-      #   }
-      # },
-      # pickers = {}
-      #
       #  See `:help telescope.builtin`
       keymaps = {
 	"<leader>sh" = {
@@ -118,6 +113,7 @@
       };
     };
 
+    # https://nix-community.github.io/nixvim/keymaps/index.html
     keymaps = [
       # Slightly advanced example of overriding default behavior and theme
       {

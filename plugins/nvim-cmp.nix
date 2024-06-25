@@ -3,32 +3,44 @@
 {
   programs.nixvim = {
     # Dependencies
+    #
     # Snippet Engine & its associated nvim-cmp source
+    # https://nix-community.github.io/nixvim/plugins/luasnip/index.html
     plugins.luasnip = {
       enable = true;
     };
+
+    # https://nix-community.github.io/nixvim/plugins/cmp-nvim-lsp.html
     plugins.cmp-nvim-lsp = {
       enable = true;
     };
+
+    # https://nix-community.github.io/nixvim/plugins/cmp-path.html
     plugins.cmp-path = {
       enable = true;
     };
+
     # `friendly-snippets` contains a variety of premade snippets
     #    See the README about individual language/framework/plugin snippets:
     #    https://github.com/rafamadriz/friendly-snippets
+    # https://nix-community.github.io/nixvim/plugins/friendly-snippets.html
     # plugins.friendly-snippets = {
     #   enable = true;
     # };
+
     # TODO: Waiting on this bug to be fixed https://github.com/NixOS/nixpkgs/issues/306367
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extralua#extraluapackages
     extraLuaPackages = ps: [
+      # Required by luasnip
       ps.jsregexp
     ];
 
     # Autocompletion
+    # See `:help cmp`
+    # https://nix-community.github.io/nixvim/plugins/cmp/index.html
     plugins.cmp = {
       enable = true;
 
-      # See `:help cmp`
       settings = {
         snippet = {
 	  expand = ''
@@ -37,9 +49,11 @@
 	    end
 	  '';
 	};
+
 	completion = {
 	  completeopt = "menu,menuone,noinsert";
 	};
+
 	# For an understanding of why these mappings were
 	# chosen, you will need to read `:help ins-completion`
 	#
@@ -93,6 +107,7 @@
 	  # For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 	  #    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 	};
+
 	# WARNING: If plugins.cmp.autoEnableSources Nixivm will automatically enable the 
 	# corresponding source plugins. This will work only when this option is set to a list.
         # If you use a raw lua string, you will need to explicitly enable the relevant source

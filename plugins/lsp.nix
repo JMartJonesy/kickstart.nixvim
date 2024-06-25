@@ -2,25 +2,33 @@
 
 {
   programs.nixvim = {
-    #Dependencies
+    # Dependencies
+    #
+    # https://nix-community.github.io/nixvim/plugins/cmp-nvim-lsp.html
     plugins.cmp-nvim-lsp = {
       enable = true;
     };
 
-    plugins.fidget = { # Useful status updates for LSP.
+    # Useful status updates for LSP.
+    # https://nix-community.github.io/nixvim/plugins/fidget/index.html
+    plugins.fidget = {
       enable = true;
     };
 
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugi#extraplugins 
     extraPlugins = with pkgs.vimPlugins; [
+      # NOTE: This is how you would ad a vim plugin that is not implemented in Nixvim, also see extraConfigLuaPre below
       # `neodev` configure Lua LSP for your Neovim config, runtime and plugins
       # used for completion, annotations, and signatures of Neovim apis
       neodev-nvim
     ];
 
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugi#extraconfigluapre
     extraConfigLuaPre = ''
       require('neodev').setup {}
     '';
 
+    # https://nix-community.github.io/nixvim/NeovimOptions/autoGroups/index.html
     autoGroups = {
       "kickstart-lsp-attach" = {
         clear = true;
@@ -47,12 +55,65 @@
     #  - and more!
     #
     # Thus, Language Servers are external tools that must be installed separately from
-    # Neovim. This is where `mason` and related plugins come into play.
+    # Neovim which are configured below in the `server` section.
     #
     # If you're wondering about lsp vs treesitter, you can check out the wonderfully
     # and elegantly composed help section, `:help lsp-vs-treesitter`
+    #
+    # https://nix-community.github.io/nixvim/plugins/lsp/index.html
     plugins.lsp = {
       enable = true;
+
+      # Enable the following language servers
+      #  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+      #
+      #  Add any additional override configuration in the following tables. Available keys are:
+      #  - cmd: Override the default command used to start the server
+      #  - filetypes: Override the default list of associated filetypes for the server
+      #  - capabilities: Override fields in capabilities. Can be used to disable certain LSP features.
+      #  - settings: Override the default settings passed when initializing the server.
+      #        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      servers = {
+        # clangd = {
+        #  enable = true;
+        #}
+        # gopls = {
+        #  enable = true;
+        #}
+        # pyright = {
+        #  enable = true;
+        #}
+        # rust_analyzer = {
+        #  enable = true;
+        #}
+        # ...etc. See `https://nix-community.github.io/nixvim/plugins/lsp` for a list of pre-configured LSPs
+        #
+        # Some languages (like typscript) have entire language plugins that can be useful:
+        #    `https://nix-community.github.io/nixvim/plugins/typescript-tools/index.html?highlight=typescript-tools#pluginstypescript-toolspackage`
+        #
+        # But for many setups the LSP (`tsserver`) will work just fine
+        # tsserver = {
+        #  enable = true;
+        #}
+
+        lua-ls = {
+          enable = true;
+
+          # cmd = {
+          #};
+          # filetypes = {
+          #};
+          settings = {
+            completion = {
+              callSnippet = "Replace";
+            };
+            #diagnostics = {
+            #  disable = {
+            #    "missing-fields";
+            #};
+          };
+        };
+      };
 
       keymaps = {
         # Diagnostic keymaps
@@ -78,6 +139,7 @@
             desc = "Open diagnostic [Q]uickfix list";
           };
         };
+
         extra = [
           # Jump to the definition of the word under your cusor.
           #  This is where a variable was first declared, or where a function is defined, etc.
@@ -176,7 +238,7 @@
       #  By default, Neovim doesn't support everything that is in the LSP specification.
       #  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       #  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      # NOTE: This is done by Nixvim when enabling cmp-nvim-lsp
+      # NOTE: This is done automatically by Nixvim when enabling cmp-nvim-lsp below is an example if you did want to add new capabilities
       #capabilities = ''
       #  capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       #'';
@@ -185,6 +247,7 @@
       #   That is to say, every time a new file is opened that is associated with
       #   an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
       #   function will be executred to configure the current buffer
+      # NOTE: This is an example of an attribute that takes raw lua
       onAttach = ''
         -- NOTE: Remember that Lua is a real programming language, and as such it is possible
         -- to define small helper and utility functions so you don't have to repeat yourself.
@@ -233,57 +296,6 @@
           end, '[T]oggle Inlay [H]ints')
         end
       '';
-
-      # Enable the following language servers
-      #  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      #
-      #  Add any additional override configuration in the following tables. Available keys are:
-      #  - cmd (table): Override the default command used to start the server
-      #  - filetypes (table): Override the default list of associated filetypes for the server
-      #  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      #  - settings (table): Override the default settings passed when initializing the server.
-      #        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-      servers = {
-        # clangd = {
-        #  enable = true;
-        #}
-        # gopls = {
-        #  enable = true;
-        #}
-        # pyright = {
-        #  enable = true;
-        #}
-        # rust_analyzer = {
-        #  enable = true;
-        #}
-        # ...etc. See `https://nix-community.github.io/nixvim/plugins/lsp` for a list of pre-configured LSPs
-        #
-        # Some languages (like typscript) have entire language plugins that can be useful:
-        #    `https://nix-community.github.io/nixvim/plugins/typescript-tools/index.html?highlight=typescript-tools#pluginstypescript-toolspackage`
-        #
-        # But for many setups the LSP (`tsserver`) will work just fine
-        # tsserver = {
-        #  enable = true;
-        #}
-
-        lua-ls = {
-          enable = true;
-
-          # cmd = {
-          #};
-          # filetypes = {
-          #};
-          settings = {
-            completion = {
-              callSnippet = "Replace";
-            };
-            #diagnostics = {
-            #  disable = {
-            #    "missing-fields";
-            #};
-          };
-        };
-      };
     };
   };
 }

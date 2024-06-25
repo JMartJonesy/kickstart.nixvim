@@ -3,6 +3,7 @@
 {
   programs.nixvim = {
     # Collection of various small independent plugins/modules
+    # https://nix-community.github.io/nixvim/plugins/mini.html
     plugins.mini = {
       enable = true;
 
@@ -42,6 +43,7 @@
     # You can configure sections in the statusline by overriding their
     # default behavior. For example, here we set the section for
     # cursor location to LINE:COLUMN
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraconfiglu#extraconfiglua
     extraConfigLua = ''
       require('mini.statusline').section_location = function()
         return '%2l:%-2v'

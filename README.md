@@ -52,28 +52,28 @@ so that you have your own copy that you can update and version control your own 
 >**NOTE**
 > This is not required but recommended so you can version control your own kickstart.nixvim configuration.
 3. Clone kickstart.nixvim
-  * If you created your own fork
-    ```sh
-    cd /etc/nixos/
-    git clone https://github.com/<YOUR-GITHUB-USERNAME>/kickstart.nixvim.git
-    ```
-  * If you skipped creating a fork
-    ```sh
-    cd /etc/nixos/
-    git clone https://github.com/JMartJonesy/kickstart.nixvim.git
-    ```
+    * If you created your own fork
+      ```sh
+      cd /etc/nixos/
+      git clone https://github.com/<YOUR-GITHUB-USERNAME>/kickstart.nixvim.git
+      ```
+    * If you skipped creating a fork
+      ```sh
+      cd /etc/nixos/
+      git clone https://github.com/JMartJonesy/kickstart.nixvim.git
+      ```
 4. Import nixvim.nix into your .nix configuration file
-  * Example of the line to add into your configuration.nix (or home.nix if you are using home-manager) file
-    ```configuration.nix
-    imports = [
-      ./kickstart.nixvim/nixvim.nix
-    ];
-    ```
+    * Example of the line to add into your configuration.nix (or home.nix if you are using home-manager) file
+      ```nix
+      imports = [
+        ./kickstart.nixvim/nixvim.nix
+      ];
+      ```
 5. Rebuild your NixOS configuration
- * Without using Flake
-   ```sh
-   nixos-rebuild switch
-   ```
+   * Without using Flake
+     ```sh
+     nixos-rebuild switch
+     ```
 6. Confirm your init.lua file has been created as loads without errors
    * Open the generated init.lua file and confirm no error dialog appears when opening
      ```sh

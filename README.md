@@ -99,5 +99,6 @@ so that you have your own copy that you can update and version control your own 
 * What if I want to "uninstall" kickstart.nixvim:
    1. Remove nixvim.nix import from your configuration.nix (or home.nix) file
    2. Remove the kickstart.nixvim directory `rm -r /etc/nixos/kickstart.nixvim`
-   3. Rebuild your NixOS configuration `nixos-rebuild switch`
-   4. **Optional:** Move your previously backed up lua configuration files to `$XDG_CONFIG_HOME/nvim` or `~/.config/nvim`
+   3. Remove any .local nvim files `rm -rf ~/.local/share/nvim/`
+   4. Rebuild your NixOS configuration `nixos-rebuild switch`
+   5. **Optional:** Move your previously backed up lua configuration files to `$XDG_CONFIG_HOME/nvim` or `~/.config/nvim`

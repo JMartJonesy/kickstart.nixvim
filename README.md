@@ -16,7 +16,7 @@ I have attempted to be as true to kickstart as possible while adding new and upd
 similar to kickstart.nvim was originally planned but as I translated more of the init.lua over I found Nix lended itself better to a more
 separated implementation. This means most plugins have their own .nix file that is imported into the base nixvim.nix file.
 2. I used as little lua code as possible in the .nix files but due to Nixvim being a relatively new Nix module not everything can be natively configured. Any lua code will slowly be removed as new Nixvim features come out that allow for native methods of configuation.
-3. I did not include Lazy nor Mason as I felt those both went against the Nix philosophy of having all your depedencies installed and managed through the .nix files. While it is possible to confgiure Lazy in Nixvim the implementation is very limited at the moment. Further enhancements to Lazy which would allow lazy loading are being discussed [here](https://github.com/nix-community/nixvim/issues/421) and I may update this repo to use Lazy when this feature is implemented.
+3. I did not include Lazy nor Mason as I felt those both went against the Nix philosophy of having all your dependencies installed and managed through the .nix files. While it is possible to confgiure Lazy in Nixvim the implementation is very limited at the moment. Further enhancements to Lazy which would allow lazy loading are being discussed [here](https://github.com/nix-community/nixvim/issues/421) and I may update this repo to use Lazy when this feature is implemented.
 
 # Installation
 

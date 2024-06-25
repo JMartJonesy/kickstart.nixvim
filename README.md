@@ -2,6 +2,7 @@
 
 >**NOTE**
 > This repo is a WORK IN PROGRESS
+>
 > I have about ~90% of the kickstart.nvim converted to Nix
 > but this repo still requires a good amount of testing to confirm things are working as expected
 
@@ -74,7 +75,7 @@ so that you have your own copy that you can update and version control your own 
      ```sh
      nixos-rebuild switch
      ```
-6. Confirm your init.lua file has been created as loads without errors
+6. Confirm your init.lua file has been created and loads without errors
    * Open the generated init.lua file and confirm no error dialog appears when opening
      ```sh
      nvim ~/.config/nvim/init.lua

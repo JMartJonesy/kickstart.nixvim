@@ -2,19 +2,10 @@
 
 {
   programs.nixvim = {
-    keymaps = [
-      {
-        mode = "";
-	key = "<leader>f";
-	action.__raw = ''
-	  function()
-	    require('conform').format { async = true, lsp_fallback = true }
-	  end
-	'';
-	options = {
-	  desc = "[F]ormat buffer";
-	};
-      }
+    # Dependencies
+    extraPackages = with pkgs; [
+      # Used to format Lua code
+      stylua
     ];
 
     plugins.conform-nvim = { # Autoformat
@@ -42,5 +33,20 @@
 	# javascript = [ [ "prettierd" "prettier" ] ];
       };
     };
+
+    keymaps = [
+      {
+        mode = "";
+	key = "<leader>f";
+	action.__raw = ''
+	  function()
+	    require('conform').format { async = true, lsp_fallback = true }
+	  end
+	'';
+	options = {
+	  desc = "[F]ormat buffer";
+	};
+      }
+    ];
   };
 }

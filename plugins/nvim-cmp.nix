@@ -6,15 +6,6 @@
     # Snippet Engine & its associated nvim-cmp source
     plugins.luasnip = {
       enable = true;
-
-      # TODO: Figure this out
-      extraConfig = {
-	build.__raw = ''
-	  function()
-	    return 'make install_jsregexp'
-	  end
-	'';
-      };
     };
     plugins.cmp-nvim-lsp = {
       enable = true;
@@ -28,6 +19,10 @@
     # plugins.friendly-snippets = {
     #   enable = true;
     # };
+    # TODO: Waiting on this bug to be fixed https://github.com/NixOS/nixpkgs/issues/306367
+    extraLuaPackages = ps: [
+      ps.jsregexp
+    ];
 
     # Autocompletion
     plugins.cmp = {

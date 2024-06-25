@@ -26,7 +26,7 @@ I have not confirmed this yet.
 
 ## Install External Dependencies
 
-- Basic utils: C Compiler (`gcc`)
+- Basic utils: `git`, C Compiler (`gcc`)
 - [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
 - Clipboard tool (xclip/xsel/win32yank or other depending on platform)
 - A [Nerd Font](https://www.nerdfonts.com/): optional, provides various icons

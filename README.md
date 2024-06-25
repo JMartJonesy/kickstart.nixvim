@@ -74,7 +74,11 @@ so that you have your own copy that you can update and version control your own 
    ```sh
    nixos-rebuild switch
    ```
-6. Confirm your init.lua file has been created by checking either `$XDG_CONFIG_HOME/nvim` or `~/.config/nvim`
+6. Confirm your init.lua file has been created as loads without errors
+   * Open the generated init.lua file and confirm no error dialog appears when opening
+     ```sh
+     nvim ~/.config/nvim/init.lua
+     ``` 
 
 # FAQ
 

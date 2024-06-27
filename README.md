@@ -37,7 +37,7 @@ This installation process also assumes you are running NixOS, this repo should w
   - If you want to write Golang, you will need `go`
   - etc.
 
-## Installing Nixvim module
+## Installing Nixvim Module
 
 This repo is currently setup to be imported into your current NixOS/Home-Manager module. 
 To setup the Nixvim module follow the steps found [here](https://nix-community.github.io/nixvim/user-guide/install.html) under the **Usage as a module (NixOS, home-manager, nix-darwin)** section.
@@ -70,12 +70,22 @@ so that you have your own copy that you can update and version control.
         ./kickstart.nixvim/nixvim.nix
       ];
       ```
-4. Rebuild your NixOS configuration
+4. Open nixvim.nix and uncomment one of the nixvim module imports at the top of the file. Choose the module depending on which module installation method you use from the [Installing Nixvim Module](#installing-nixvim-module) section above (Home-Manager module, NixOS module, or Darwin Module).
+    * The module should be passed into your configuration through the `inputs` nixos param
+    ```nix
+    # Uncomment if you are using the home-manager module
+    #inputs.nixvim.homeManagerModules.nixvim
+    # Uncomment if you are using the nixos module
+    #inputs.nixvim.nixosModules.nixvim
+    # Uncomment if you are using the nix-darwin module
+    #inputs.nixvim.nixDarwinModules.nixvim
+    ```
+5. Rebuild your NixOS configuration
    * Without using Flake
      ```sh
      nixos-rebuild switch
      ```
-5. Confirm your init.lua file has been created and loads without errors
+6. Confirm your init.lua file has been created and loads without errors
    * Open the generated init.lua file and confirm no error dialog appears when opening
      ```sh
      nvim ~/.config/nvim/init.lua

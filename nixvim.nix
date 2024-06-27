@@ -2,7 +2,16 @@
 
 {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    # NOTE: The first thing you will want to do is uncommented on of the three imports below
+    # depending on which module you chose to use to install Nixvim.
+    #
+    # Uncomment if you are using the home-manager module
+    #inputs.nixvim.homeManagerModules.nixvim
+    # Uncomment if you are using the nixos module
+    #inputs.nixvim.nixosModules.nixvim
+    # Uncomment if you are using the nix-darwin module
+    #inputs.nixvim.nixDarwinModules.nixvim
+
     # Plugins
     ./plugins/gitsigns.nix
     ./plugins/which-key.nix
@@ -13,6 +22,7 @@
     ./plugins/mini.nix
     ./plugins/treesitter.nix
     ./plugins/kickstart/health.nix
+
     # NOTE: Add/Configure additional plugins for Kickstart.nixvim
     #
     #  Here are some example plugins that I've included in the Kickstart repository.
@@ -23,6 +33,7 @@
     # ./plugins/kickstart/plugins/lint.nix
     # ./plugins/kickstart/plugins/autopairs.nix
     # ./plugins/kickstart/plugins/neo-tree.nix
+    #
     # NOTE: Configure your own plugins `see https://nix-community.github.io/nixvim/`
     # Add your plugins to ./plugins/custom/plugins and import them below
   ];

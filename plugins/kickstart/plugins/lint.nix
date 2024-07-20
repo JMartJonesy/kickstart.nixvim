@@ -1,5 +1,3 @@
-{ config, pkgs, inputs, ... }:
-
 {
   programs.nixvim = {
     # Linting

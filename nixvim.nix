@@ -19,7 +19,6 @@
     ./plugins/nvim-cmp.nix
     ./plugins/mini.nix
     ./plugins/treesitter.nix
-    ./plugins/kickstart/health.nix
 
     # NOTE: Add/Configure additional plugins for Kickstart.nixvim
     #

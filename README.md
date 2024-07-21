@@ -2,9 +2,6 @@
 
 >**NOTE**
 > This repo is a WORK IN PROGRESS
->
-> I have about ~90% of the kickstart.nvim converted to Nixvim
-> but this repo still requires a good amount of testing to confirm things are working as expected
 
 ## Introduction
 

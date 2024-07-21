@@ -1,5 +1,3 @@
-{ config, pkgs, inputs, ... }:
-
 {
   programs.nixvim = {
     # Collection of various small independent plugins/modules
@@ -37,7 +35,6 @@
         # ... and there is more!
         # Check out: https://github.com/echasnovski/mini.nvim
       };
-
     };
 
     # You can configure sections in the statusline by overriding their

@@ -206,7 +206,6 @@
           # Rename the variable under your cursor.
           #  Most Language Servers support renaming across files, etc.
           "<leader>rn" = {
-            #mode = "n"; TODO: FIGURE OUT HOW TO SET THIS
             action = "rename";
             desc = "LSP: [R]e[n]ame";
           };

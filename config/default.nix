@@ -130,6 +130,17 @@
     have_nerd_font = false;
   };
 
+  clipboard = {
+    providers = {
+      wl-copy.enable = true; # For Wayland
+      xsel.enable = true; # For X11
+    };
+    # Sync clipboard between OS and Neovim
+    #  Remove this option if you want your OS clipboard to remain independent.
+    #  See `:help 'clipboard'`
+    register = "unnamedplus";
+  };
+
   # [[ Setting options ]]
   # See `:help vim.opt`
   # NOTE: You can change these options as you wish!
@@ -147,11 +158,6 @@
 
     # Don't show the mode, since it's already in the statusline
     showmode = false;
-
-    # Sync clipboard between OS and Neovim
-    #  Remove this option if you want your OS clipboard to remain independent.
-    #  See `:help 'clipboard'`
-    clipboard = "unnamedplus";
 
     # Enable break indent
     breakindent = true;

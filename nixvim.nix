@@ -4,7 +4,7 @@
     # depending on which module you chose to use to install Nixvim.
     #
     # Uncomment if you are using the home-manager module
-    inputs.nixvim.homeManagerModules.nixvim
+    #inputs.nixvim.homeManagerModules.nixvim
     # Uncomment if you are using the nixos module
     #inputs.nixvim.nixosModules.nixvim
     # Uncomment if you are using the nix-darwin module

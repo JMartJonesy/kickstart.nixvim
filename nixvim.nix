@@ -4,7 +4,7 @@
     # depending on which module you chose to use to install Nixvim.
     #
     # Uncomment if you are using the home-manager module
-    #inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeManagerModules.nixvim
     # Uncomment if you are using the nixos module
     #inputs.nixvim.nixosModules.nixvim
     # Uncomment if you are using the nix-darwin module
@@ -207,7 +207,7 @@
       # Minimal number of screen lines to keep above and below the cursor
       scrolloff = 10;
 
-      # Set highlight on search, but clear on pressing <Esc> in normal mode
+      # See `:help hlsearch`
       hlsearch = true;
     };
 
@@ -215,6 +215,7 @@
     #  See `:help vim.keymap.set()`
     # https://nix-community.github.io/nixvim/keymaps/index.html
     keymaps = [
+      # Clear highlights on search when pressing <Esc> in normal mode
       {
         mode = "n";
         key = "<Esc>";
@@ -325,12 +326,6 @@
       # Detect tabstop and shiftwidth automatically
       # https://nix-community.github.io/nixvim/plugins/sleuth/index.html
       sleuth = {
-        enable = true;
-      };
-
-      # "gc" to comment visual regions/lines
-      # https://nix-community.github.io/nixvim/plugins/comment/index.html
-      comment = {
         enable = true;
       };
 

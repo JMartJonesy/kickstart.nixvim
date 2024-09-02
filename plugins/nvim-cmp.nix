@@ -26,13 +26,6 @@
     #   enable = true;
     # };
 
-    # TODO: Waiting on this bug to be fixed https://github.com/NixOS/nixpkgs/issues/306367
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extralua#extraluapackages
-    extraLuaPackages = ps: [
-      # Required by luasnip
-      ps.jsregexp
-    ];
-
     # Autocompletion
     # See `:help cmp`
     # https://nix-community.github.io/nixvim/plugins/cmp/index.html

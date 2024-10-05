@@ -30,9 +30,13 @@
         # Conform can also run multiple formatters sequentially
         # python = [ "isort "black" ];
         #
-        # You can use a sublist to tell conform to run *until* a formatter
+        # You can use an attribute set and stop_after_first option to tell conform to run *until* a formatter
         # is found
-        # javascript = [ [ "prettierd" "prettier" ] ];
+        # javascript = {
+        #    __unkeyed-1 = "prettierd";
+        #    __unkeyed-2 = "prettier";
+        #    stop_after_first = true;
+        # };
       };
     };
 

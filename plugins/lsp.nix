@@ -91,7 +91,7 @@
         #  enable = true;
         #}
 
-        lua-ls = {
+        lua_ls = {
           enable = true;
 
           # cmd = {

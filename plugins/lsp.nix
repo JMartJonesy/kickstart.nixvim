@@ -115,7 +115,7 @@
         # Diagnostic keymaps
         diagnostic = {
           "<leader>q" = {
-            #mode = "n";
+            mode = "n";
             action = "setloclist";
             desc = "Open diagnostic [Q]uickfix list";
           };

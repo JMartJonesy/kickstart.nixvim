@@ -91,6 +91,11 @@
         # If you use a raw lua string, you will need to explicitly enable the relevant source
         # plugins in your nixvim configuration.
         sources = [
+          {
+            name = "lazydev";
+            # set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+            group_index = 0;
+          }
           # Adds other completion capabilites.
           #  nvim-cmp does not ship with all sources by default. They are split
           #  into multiple repos for maintenance purposes.

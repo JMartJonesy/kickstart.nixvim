@@ -91,17 +91,17 @@
         # If you use a raw lua string, you will need to explicitly enable the relevant source
         # plugins in your nixvim configuration.
         sources = [
-          # Snippet Engine & its associated nvim-cmp source
-          # https://nix-community.github.io/nixvim/plugins/luasnip/index.html
-          {
-            name = "luasnip";
-          }
           # Adds other completion capabilites.
           #  nvim-cmp does not ship with all sources by default. They are split
           #  into multiple repos for maintenance purposes.
           # https://nix-community.github.io/nixvim/plugins/cmp-nvim-lsp.html
           {
             name = "nvim_lsp";
+          }
+          # Snippet Engine & its associated nvim-cmp source
+          # https://nix-community.github.io/nixvim/plugins/luasnip/index.html
+          {
+            name = "luasnip";
           }
           # https://nix-community.github.io/nixvim/plugins/cmp-path.html
           {

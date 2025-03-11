@@ -119,6 +119,8 @@
       {
         mode = "n";
         key = "<leader>hu";
+        # `undo_stage_hunk` is deprecated. See https://github.com/nvim-lua/kickstart.nvim/issues/1319
+        #  Replacement `stage_hunk` was accidentally merged. See https://github.com/nvim-lua/kickstart.nvim/pull/1321#issuecomment-2664265962
         action.__raw = ''
           function()
             require('gitsigns').undo_stage_hunk()
@@ -204,6 +206,8 @@
       {
         mode = "n";
         key = "<leader>tD";
+        # `toggle_deleted` is deprecated. See https://github.com/nvim-lua/kickstart.nvim/issues/1319
+        #  Replacement `preview_hunk_inline` was accidentally merged. See https://github.com/nvim-lua/kickstart.nvim/pull/1321#issuecomment-2664265962
         action.__raw = ''
           function()
             require('gitsigns').toggle_deleted()

@@ -34,7 +34,7 @@
           end
         '';
         options = {
-          desc = "Jump to next git [C]hange";
+          desc = "Jump to next git [c]hange";
         };
       }
       {
@@ -50,7 +50,7 @@
           end
         '';
         options = {
-          desc = "Jump to previous git [C]hange";
+          desc = "Jump to previous git [c]hange";
         };
       }
 
@@ -65,7 +65,7 @@
           end
         '';
         options = {
-          desc = "stage git hunk";
+          desc = "git [s]tage hunk";
         };
       }
       {
@@ -77,7 +77,7 @@
           end
         '';
         options = {
-          desc = "reset git hunk";
+          desc = "git [r]eset hunk";
         };
       }
       # normal mode

@@ -170,7 +170,7 @@
         key = "<leader>hb";
         action.__raw = ''
           function()
-            require('gitsigns').blame_line()
+            require('gitsigns').blame_line({ full = true })
           end
         '';
         options = {
@@ -240,7 +240,7 @@
       }
       {
         mode = "n";
-        key = "<leader>tD";
+        key = "<leader>td";
         # `toggle_deleted` is deprecated. See https://github.com/nvim-lua/kickstart.nvim/issues/1319
         #  Replacement `preview_hunk_inline` was accidentally merged. See https://github.com/nvim-lua/kickstart.nvim/pull/1321#issuecomment-2664265962
         action.__raw = ''
@@ -249,7 +249,7 @@
           end
         '';
         options = {
-          desc = "[T]oggle git show [D]eleted";
+          desc = "[T]oggle git show [d]eleted";
         };
       }
       { # official gitsigns

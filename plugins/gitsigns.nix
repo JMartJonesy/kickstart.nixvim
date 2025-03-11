@@ -17,7 +17,6 @@
     };
 
     # NOTE: add gitsigns recommended keymaps if you are interested
-    /*
     # https://nix-community.github.io/nixvim/keymaps/index.html
     keymaps = [
       # Navigation
@@ -215,6 +214,5 @@
         };
       }
     ];
-    */
   };
 }

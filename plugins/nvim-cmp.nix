@@ -8,6 +8,9 @@
     #   enable = true;
     # };
 
+    plugins.lazydev.enable = true; # autoEnableSources not enough
+    plugins.luasnip.enable = true; # autoEnableSources not enough
+
     # Autocompletion
     # See `:help cmp`
     # https://nix-community.github.io/nixvim/plugins/cmp/index.html

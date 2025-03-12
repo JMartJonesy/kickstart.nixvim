@@ -93,7 +93,10 @@
         # corresponding source plugins. This will work only when this option is set to a list.
         # If you use a raw lua string, you will need to explicitly enable the relevant source
         # plugins in your nixvim configuration.
+        # See list of most cmp source plugins that are autoloaded by defining the source:
+        # https://github.com/nix-community/nixvim/blob/main/plugins/cmp/sources/default.nix
         sources = [
+          # https://nix-community.github.io/nixvim/plugins/lazydev/index.html
           {
             name = "lazydev";
             # set group index to 0 to skip loading LuaLS completions as lazydev recommends it
@@ -115,6 +118,7 @@
           {
             name = "path";
           }
+          # https://nix-community.github.io/nixvim/plugins/cmp-nvim-lsp-signature-help.html
           {
             name = "nvim_lsp_signature_help";
           }

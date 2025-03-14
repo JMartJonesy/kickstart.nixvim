@@ -195,7 +195,7 @@
           # Execute a code action, usually your cursor needs to be on top of an error
           # or a suggestion from your LSP for this to activate.
           "<leader>ca" = {
-            #mode = "n";
+            mode = ["n" "x"];
             action = "code_action";
             desc = "LSP: [C]ode [A]ction";
           };

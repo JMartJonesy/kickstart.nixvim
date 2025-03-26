@@ -70,17 +70,17 @@
       #        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       servers = {
         # clangd = {
-        #  enable = true;
-        #}
+        #   enable = true;
+        # };
         # gopls = {
-        #  enable = true;
-        #}
+        #   enable = true;
+        # };
         # pyright = {
-        #  enable = true;
-        #}
+        #   enable = true;
+        # };
         # rust_analyzer = {
-        #  enable = true;
-        #}
+        #   enable = true;
+        # };
         # ...etc. See `https://nix-community.github.io/nixvim/plugins/lsp` for a list of pre-configured LSPs
         #
         # Some languages (like typscript) have entire language plugins that can be useful:
@@ -88,25 +88,25 @@
         #
         # But for many setups the LSP (`tsserver`) will work just fine
         # tsserver = {
-        #  enable = true;
-        #}
+        #   enable = true;
+        # };
 
         lua_ls = {
           enable = true;
 
           # cmd = {
-          #};
+          # };
           # filetypes = {
-          #};
+          # };
           settings = {
             completion = {
               callSnippet = "Replace";
             };
-            #diagnostics = {
-            #  disable = [
-            #    "missing-fields"
-            #  ];
-            #};
+            # diagnostics = {
+            #   disable = [
+            #     "missing-fields"
+            #   ];
+            # };
           };
         };
       };
@@ -115,7 +115,7 @@
         # Diagnostic keymaps
         diagnostic = {
           "<leader>q" = {
-            #mode = "n";
+            mode = "n";
             action = "setloclist";
             desc = "Open diagnostic [Q]uickfix list";
           };
@@ -195,7 +195,7 @@
           # Execute a code action, usually your cursor needs to be on top of an error
           # or a suggestion from your LSP for this to activate.
           "<leader>ca" = {
-            #mode = "n";
+            mode = ["n" "x"];
             action = "code_action";
             desc = "LSP: [C]ode [A]ction";
           };

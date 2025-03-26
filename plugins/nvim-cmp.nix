@@ -8,6 +8,9 @@
     #   enable = true;
     # };
 
+    plugins.lazydev.enable = true; # autoEnableSources not enough
+    plugins.luasnip.enable = true; # autoEnableSources not enough
+
     # Autocompletion
     # See `:help cmp`
     # https://nix-community.github.io/nixvim/plugins/cmp/index.html
@@ -30,19 +33,22 @@
         # For an understanding of why these mappings were
         # chosen, you will need to read `:help ins-completion`
         #
-        # No, but seriously, Please read `:help ins-completion`, it is really good!
+        # No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = {
           # Select the [n]ext item
           "<C-n>" = "cmp.mapping.select_next_item()";
           # Select the [p]revious item
           "<C-p>" = "cmp.mapping.select_prev_item()";
+
           # Scroll the documentation window [b]ack / [f]orward
           "<C-b>" = "cmp.mapping.scroll_docs(-4)";
           "<C-f>" = "cmp.mapping.scroll_docs(4)";
+
           # Accept ([y]es) the completion.
           #  This will auto-import if your LSP supports it.
           #  This will expand snippets if the LSP sent a snippet.
           "<C-y>" = "cmp.mapping.confirm { select = true }";
+
           # If you prefer more traditional completion keymaps,
           # you can uncomment the following lines.
           # "<CR>" = "cmp.mapping.confirm { select = true }";
@@ -60,7 +66,7 @@
           #    $body
           #  end
           #
-          # <c-l> will move you to the right of the expansion locations.
+          # <c-l> will move you to the right of each of the expansion locations.
           # <c-h> is similar, except moving you backwards.
           "<C-l>" = ''
             cmp.mapping(function()
@@ -87,11 +93,14 @@
         # corresponding source plugins. This will work only when this option is set to a list.
         # If you use a raw lua string, you will need to explicitly enable the relevant source
         # plugins in your nixvim configuration.
+        # See list of most cmp source plugins that are autoloaded by defining the source:
+        # https://github.com/nix-community/nixvim/blob/main/plugins/cmp/sources/default.nix
         sources = [
-          # Snippet Engine & its associated nvim-cmp source
-          # https://nix-community.github.io/nixvim/plugins/luasnip/index.html
+          # https://nix-community.github.io/nixvim/plugins/lazydev/index.html
           {
-            name = "luasnip";
+            name = "lazydev";
+            # set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+            group_index = 0;
           }
           # Adds other completion capabilites.
           #  nvim-cmp does not ship with all sources by default. They are split
@@ -100,9 +109,18 @@
           {
             name = "nvim_lsp";
           }
+          # Snippet Engine & its associated nvim-cmp source
+          # https://nix-community.github.io/nixvim/plugins/luasnip/index.html
+          {
+            name = "luasnip";
+          }
           # https://nix-community.github.io/nixvim/plugins/cmp-path.html
           {
             name = "path";
+          }
+          # https://nix-community.github.io/nixvim/plugins/cmp-nvim-lsp-signature-help.html
+          {
+            name = "nvim_lsp_signature_help";
           }
         ];
       };

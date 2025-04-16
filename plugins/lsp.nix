@@ -212,7 +212,8 @@
       #  By default, Neovim doesn't support everything that is in the LSP specification.
       #  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       #  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      # NOTE: This is done automatically by Nixvim when enabling cmp-nvim-lsp below is an example if you did want to add new capabilities
+      # NOTE: This is done automatically by Nixvim when enabling cmp-nvim-lsp
+      #  Below is an example if you did want to add new capabilities
       #capabilities = ''
       #  capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       #'';

@@ -2,7 +2,7 @@
   programs.nixvim = {
     # Dependencies
     #
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extrapackages
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extrapackages
     extraPackages = with pkgs; [
       # Used to format Lua code
       stylua

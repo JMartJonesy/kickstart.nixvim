@@ -136,7 +136,7 @@
       }
     ];
 
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraconfiglua#extraconfiglua
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraconfiglua
     extraConfigLua = ''
       require('dap').listeners.after.event_initialized['dapui_config'] = require('dapui').open
       require('dap').listeners.before.event_terminated['dapui_config'] = require('dapui').close

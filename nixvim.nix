@@ -138,7 +138,7 @@ in
       };
     };
 
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=globals#globals
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#globals
     globals = {
       # Set <space> as the leader key
       # See `:help mapleader`
@@ -165,7 +165,7 @@ in
     # See `:help vim.opt`
     # NOTE: You can change these options as you wish!
     #  For more options, you can see `:help option-list`
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=globals#opts
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#opts
     opts = {
       # Show line numbers
       number = true;
@@ -350,12 +350,12 @@ in
       };
     };
 
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraplugins
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraplugins
     extraPlugins = with pkgs.vimPlugins; [
     ];
 
     # The line beneath this is called `modeline`. See `:help modeline`
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraconfigluapost
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraconfigluapost
     extraConfigLuaPost = ''
       -- vim: ts=2 sts=2 sw=2 et
     '';

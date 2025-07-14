@@ -1,4 +1,8 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, lib, config, ... }:
+let
+  map = import ./lib/mkKeymap.nix { };
+in
+{
   imports = [
     # NOTE: The first thing you will want to do is uncommented on of the three imports below
     # depending on which module you chose to use to install Nixvim.
@@ -134,7 +138,7 @@
       };
     };
 
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=globals#globals
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#globals
     globals = {
       # Set <space> as the leader key
       # See `:help mapleader`
@@ -161,13 +165,13 @@
     # See `:help vim.opt`
     # NOTE: You can change these options as you wish!
     #  For more options, you can see `:help option-list`
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=globals#opts
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#opts
     opts = {
       # Show line numbers
       number = true;
       # You can also add relative line numbers, to help with jumping.
       #  Experiment for yourself to see if you like it!
-      #relativenumber = true
+      # relativenumber = true;
 
       # Enable mouse mode, can be useful for resizing splits for example!
       mouse = "a";
@@ -337,7 +341,7 @@
 
     plugins = {
       # Adds icons for plugins to utilize in ui
-      web-devicons.enable = true;
+      web-devicons.enable = config.programs.nixvim.globals.have_nerd_font;
 
       # Detect tabstop and shiftwidth automatically
       # https://nix-community.github.io/nixvim/plugins/sleuth/index.html
@@ -346,22 +350,12 @@
       };
     };
 
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraplugins
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraplugins
     extraPlugins = with pkgs.vimPlugins; [
-      # Useful for getting pretty icons, but requires a Nerd Font.
-      nvim-web-devicons # TODO: Figure out how to configure using this with telescope
     ];
 
-    # TODO: Figure out where to move this
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraconfigluapre
-    extraConfigLuaPre = ''
-      if vim.g.have_nerd_font then
-        require('nvim-web-devicons').setup {}
-      end
-    '';
-
     # The line beneath this is called `modeline`. See `:help modeline`
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraconfigluapost
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraconfigluapost
     extraConfigLuaPost = ''
       -- vim: ts=2 sts=2 sw=2 et
     '';

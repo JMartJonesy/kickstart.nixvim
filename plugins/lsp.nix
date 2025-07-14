@@ -16,7 +16,7 @@
       enable = true;
     };
 
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugi#extraplugins
+    # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraplugins
     extraPlugins = with pkgs.vimPlugins; [
       # NOTE: This is where you would add a vim plugin that is not implemented in Nixvim, also see extraConfigLuaPre below
       #
@@ -212,7 +212,8 @@
       #  By default, Neovim doesn't support everything that is in the LSP specification.
       #  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       #  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      # NOTE: This is done automatically by Nixvim when enabling cmp-nvim-lsp below is an example if you did want to add new capabilities
+      # NOTE: This is done automatically by Nixvim when enabling cmp-nvim-lsp
+      #  Below is an example if you did want to add new capabilities
       #capabilities = ''
       #  capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       #'';
@@ -220,7 +221,7 @@
       # This function gets run when an LSP attaches to a particular buffer.
       #   That is to say, every time a new file is opened that is associated with
       #   an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-      #   function will be executred to configure the current buffer
+      #   function will be executed to configure the current buffer
       # NOTE: This is an example of an attribute that takes raw lua
       onAttach = ''
         -- NOTE: Remember that Lua is a real programming language, and as such it is possible

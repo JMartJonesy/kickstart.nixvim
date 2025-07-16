@@ -49,7 +49,7 @@ You can use this repo in four ways:
 
 ### 1. Standalone Usage (No Configuration Needed)
 
-Run Neovim instantly without modifying any user or system configuration:
+Run instantly without modifying any user or system configuration:
 
 ```sh
 nix run github:JMartJonesy/kickstart.nixvim

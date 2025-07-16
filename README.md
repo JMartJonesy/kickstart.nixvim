@@ -2,6 +2,10 @@
 
 >**NOTE**
 > This repo is a WORK IN PROGRESS
+>
+> I have updated this repo to use a flake approach so that it can
+> easily be incorporated in any setup.
+> If you are looking for the previous implementation it can be found [here](https://github.com/JMartJonesy/kickstart.nixvim/tree/legacy)
 
 ## Introduction
 
@@ -19,8 +23,7 @@ modular implementation. This means most plugins have their own .nix files that a
 
 # Installation
 
-This installation process assumes you understand the basics of importing and adding dependencies to your .nix configuration file.
-This installation process also assumes you are running NixOS, this repo should work the same with a home-manager configuration not on NixOS but I have not confirmed this yet. I plan to add more options for installation once i've had the time to study Nix a bit more.
+This installation process assumes you understand the basics of importing and adding dependencies to your .nix configuration files.
 
 ## Install External Dependencies
 
@@ -34,12 +37,81 @@ This installation process also assumes you are running NixOS, this repo should w
   - If you want to write Golang, you will need `go`
   - etc.
 
-## Installing Nixvim Module
+## Overview
 
-This repo is currently setup to be imported into your current NixOS/Home-Manager module. 
-To setup the Nixvim module follow the steps found [here](https://nix-community.github.io/nixvim/user-guide/install.html) under the **Usage as a module (NixOS, home-manager, nix-darwin)** section.
+You can use this repo in four ways:
 
-## Setting up kickstart.nixvim
+| Use Case         | Method                                                                 |
+|------------------|------------------------------------------------------------------------|
+| Standalone Neovim| Run a bundled Neovim executable with kickstart.nixvim config, no setup |
+| NixOS Module     | System-level integration on NixOS                                      |
+| Home Manager     | User-level integration on any OS using Home Manager                    |
+| nix-darwin       | User-level integration on macOS using nix-darwin                       |
+
+---
+## Use-cases
+
+### 1. Standalone Usage (No Configuration Needed)
+
+Run instantly without modifying any user or system configuration:
+
+```sh
+nix run github:JMartJonesy/kickstart.nixvim
+```
+Or build it locally:
+```sh
+nix build github:JMartJonesy/kickstart.nixvim
+./result/bin/nvim
+```
+
+### 2. NixOS Module
+1. Add kickstart.nxivim to your `flake.nix`:
+```nix
+inputs.kickstart-nixvim.url = "github:JMartJonesy/kickstart.nixvim";
+```
+2. Import the nixosModules in your `configuration.nix`:
+```nix
+{
+  imports = [
+    inputs.kickstart-nixvim.nixosModules.default
+  ];
+
+  programs.nixvim.enable = true;
+}
+```
+
+### 3. Home Manager Module
+1. Add kickstart.nxivim to your `flake.nix`:
+```nix
+inputs.kickstart-nixvim.url = "github:JMartJonesy/kickstart.nixvim";
+```
+2. Import the homeManagerModules in your `home.nix`:
+```nix
+{
+  imports = [
+    inputs.kickstart-nixvim.homeManagerModules.default
+  ];
+
+  programs.nixvim.enable = true;
+}
+```
+
+### 4. nix-darwin Module (macOS)
+1. Add kickstart.nxivim to your `flake.nix`:
+```nix
+inputs.kickstart-nixvim.url = "github:JMartJonesy/kickstart.nixvim";
+```
+2. Import the darwinModules in your `darwin-configuration.nix`:
+```nix
+{
+  imports = [
+    inputs.kickstart-nixvim.darwinModules.default
+  ];
+
+  programs.nixvim.enable = true;
+}
+```
+## Local configuration
 
 >**NOTE**
 > Backup your previous configuration (if any exists)
@@ -47,46 +119,21 @@ To setup the Nixvim module follow the steps found [here](https://nix-community.g
 
 1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo
 so that you have your own copy that you can update and version control.
->**NOTE**
-> This is not required but recommended so you can version control your own kickstart.nixvim configuration.
 2. Clone kickstart.nixvim
     * If you created your own fork
       ```sh
-      cd /etc/nixos/
+      cd ~
       git clone https://github.com/<YOUR-GITHUB-USERNAME>/kickstart.nixvim.git
       ```
-    * If you skipped creating a fork
-      ```sh
-      cd /etc/nixos/
-      git clone https://github.com/JMartJonesy/kickstart.nixvim.git
-      ```
-3. Import nixvim.nix into your .nix configuration file
-    * Example of the line to add into your configuration.nix file (or home.nix if you are using home-manager)
-      ```nix
-      imports = [
-        ./kickstart.nixvim/nixvim.nix
-      ];
-      ```
-4. Open nixvim.nix and uncomment one of the nixvim module imports at the top of the file. Choose the module depending on which module installation method you use from the [Installing Nixvim Module](#installing-nixvim-module) section above (Home-Manager module, NixOS module, or Darwin Module).
-    * The module should be passed into your configuration through the `inputs` nixos param
-    ```nix
-    # Uncomment if you are using the home-manager module
-    #inputs.nixvim.homeManagerModules.nixvim
-    # Uncomment if you are using the nixos module
-    #inputs.nixvim.nixosModules.nixvim
-    # Uncomment if you are using the nix-darwin module
-    #inputs.nixvim.nixDarwinModules.nixvim
-    ```
+3. Update your flake.nix to refer to your local kickstart.nixvim repo
+```nix
+inputs.kickstart-nixvim.url = "path:<PATH_TO>/kickstart.nixvim";
+```
 5. Rebuild your NixOS configuration
-   * Without using Flake
-     ```sh
-     nixos-rebuild switch
-     ```
 6. Confirm your init.lua file has been created and loads without errors
-   * Open the generated init.lua file and confirm no error dialog appears when opening
-     ```sh
-     nvim ~/.config/nvim/init.lua
-     ``` 
+```sh
+nvim ~/.config/nvim/init.lua
+``` 
 
 # FAQ
 
@@ -105,8 +152,8 @@ so that you have your own copy that you can update and version control.
     config directory and the matching local directory
     `~/.local/share/nvim-backup`.
 * What if I want to "uninstall" kickstart.nixvim:
-   1. Remove nixvim.nix import from your configuration.nix file (or home.nix if you are using home-manager)
-   2. Remove the kickstart.nixvim directory `rm -r /etc/nixos/kickstart.nixvim`
+   1. Remove kickstart-nixvim from your `flake.nix` and the module imports from you `configuration.nix`, `home.nix`, or `darwin-configuration.nix`
+   2. Remove the kickstart.nixvim directory `rm -r ~/<PATH_TO>/kickstart.nixvim`
    3. Remove any .local nvim files `rm -rf ~/.local/share/nvim/`
    4. **Optional:** Move your previously backed up lua configuration files to `$XDG_CONFIG_HOME/nvim` or `~/.config/nvim`
    5. Rebuild your NixOS configuration `nixos-rebuild switch`

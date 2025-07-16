@@ -92,7 +92,7 @@
       # };
 
       # Nix lsp
-      nix_ls = {
+      nil_ls = {
         enable = true;
       };
 

@@ -2,6 +2,10 @@
 
 >**NOTE**
 > This repo is a WORK IN PROGRESS
+>
+> I have updated this repo to use a flake approach so that it can
+> easily be incorporated in any setup.
+> If you are looking for the previous implementation it can be found [here](https://github.com/JMartJonesy/kickstart.nixvim/tree/legacy)
 
 ## Introduction
 

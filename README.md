@@ -25,8 +25,7 @@ This installation process assumes you understand the basics of importing and add
 
 ## Install External Dependencies
 
-- Basic utils: `git`, C Compiler (`gcc`)
-- [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
+- Basic utils: `git`
 - Clipboard tool (xclip/xsel/win32yank or other depending on platform)
 - A [Nerd Font](https://www.nerdfonts.com/): optional, provides various icons
   - if you have it set `have_nerd_font` in `nixvim.nix` to true

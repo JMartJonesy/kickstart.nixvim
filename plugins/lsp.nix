@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # Dependencies
   # { 'Bilal2453/luvit-meta', lazy = true },
   #
@@ -90,6 +91,12 @@
       #   enable = true;
       # };
 
+      # Nix lsp
+      nix_ls = {
+        enable = true;
+      };
+
+      # Lua lsp
       lua_ls = {
         enable = true;
 
@@ -108,18 +115,15 @@
           # };
         };
       };
-    };
 
-    nil-ls = {
-      enable = true;
-    };
+      html = {
+        enable = true;
+      };
 
-    html = {
-      enable = true;
-    };
+      cssls = {
+        enable = true;
+      };
 
-    cssls = {
-      enable = true;
     };
 
     keymaps = {
@@ -206,7 +210,10 @@
         # Execute a code action, usually your cursor needs to be on top of an error
         # or a suggestion from your LSP for this to activate.
         "<leader>ca" = {
-          mode = ["n" "x"];
+          mode = [
+            "n"
+            "x"
+          ];
           action = "code_action";
           desc = "LSP: [C]ode [A]ction";
         };

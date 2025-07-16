@@ -90,6 +90,12 @@
       #   enable = true;
       # };
 
+      # Nix lsp
+      nil_ls = {
+        enable = true;
+      };
+
+      # Lua lsp
       lua_ls = {
         enable = true;
 

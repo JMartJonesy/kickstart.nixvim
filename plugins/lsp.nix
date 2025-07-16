@@ -110,6 +110,18 @@
       };
     };
 
+    nil-ls = {
+      enable = true;
+    };
+
+    html = {
+      enable = true;
+    };
+
+    cssls = {
+      enable = true;
+    };
+
     keymaps = {
       # Diagnostic keymaps
       diagnostic = {

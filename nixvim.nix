@@ -361,17 +361,9 @@ in
   extraPlugins = with pkgs.vimPlugins; [
   ];
 
-  # The line beneath this is called `modeline`. See `:help modeline`
   # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraconfigluapost
   extraConfigLuaPost = ''
-      -- vim: ts=2 sts=2 sw=2 et
-      vim.api.nvim_create_autocmd("VimEnter", {
-      pattern = "*",
-      callback = function()
-        if vim.fn.isdirectory(vim.fn.expand("%")) == 1 then
-          vim.cmd("Yazi")
-        end
-      end,
-    })
+    -- vim: ts=2 sts=2 sw=2 et
   '';
 }
+# The line beneath this is called `modeline`. See `:help modeline`

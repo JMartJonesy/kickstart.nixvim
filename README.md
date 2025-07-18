@@ -4,7 +4,7 @@
 > I have updated this repo to use a flake approach so that it can
 > easily be incorporated into any setup.
 >
-> I apologize that this change is not backwards compatible as nixvim standalone requires a specific folder structure. I have moved all plugins under the `/config` directory and have simplified the plugins directory structure. 
+> I apologize that this change is not backwards compatible as nixvim standalone requires a specific folder structure. I have moved all plugins under the `/config` directory and have simplified the plugins directory structure. The setting `have_nerd_font` has been renamed to `enable_nerds_fonts`
 >
 >If you are looking for the previous implementation it can be found [here](https://github.com/JMartJonesy/kickstart.nixvim/tree/legacy)
 
@@ -24,14 +24,14 @@ modular implementation. This means most plugins have their own .nix files that a
 
 # Installation
 
-This installation process assumes you understand the basics of importing and adding dependencies to your .nix configuration files.
+If not using standalone setup this installation process assumes you understand the basics of importing and adding dependencies to your .nix configuration files.
 
 ## Install External Dependencies
 
 - Basic utils: `git`
 - Clipboard tool (xclip/xsel/win32yank or other depending on platform)
 - A [Nerd Font](https://www.nerdfonts.com/): optional, provides various icons
-  - if you have it set `have_nerd_font` in `nixvim.nix` to true
+  - if you have it set `enable_nerd_fonts` in `nixvim.nix` to true
 - Language Dependencies:
   - If you want to write Typescript, you will need `npm`
   - If you want to write Golang, you will need `go`

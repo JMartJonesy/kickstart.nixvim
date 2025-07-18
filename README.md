@@ -52,16 +52,16 @@ You can use this repo in four ways:
 
 Run instantly without modifying any user or system configuration:
 ```nix
-nix run . -- <FILE>
+nix run github:JMartJonesy/kickstart.nixvim -- <FILE>
 ```
 Or build your own runnable nvim that can be reused
 ```nix
-nix build .
+nix build github:JMartJonesy/kickstart.nixvim
 ./result/bin/nvim <FILE>
 ```
 
 ### 2. NixOS Module
-1. Add kickstart.nxivim to your `flake.nix`:
+1. Add kickstart.nixvim to your `flake.nix`:
 ```nix
 inputs.kickstart-nixvim.url = "github:JMartJonesy/kickstart.nixvim";
 ```
@@ -77,7 +77,7 @@ inputs.kickstart-nixvim.url = "github:JMartJonesy/kickstart.nixvim";
 ```
 
 ### 3. Home Manager Module
-1. Add kickstart.nxivim to your `flake.nix`:
+1. Add kickstart.nixvim to your `flake.nix`:
 ```nix
 inputs.kickstart-nixvim.url = "github:JMartJonesy/kickstart.nixvim";
 ```

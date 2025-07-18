@@ -48,18 +48,10 @@ You can use this repo in four ways:
 ---
 ## Use-cases
 
-### 1. Standalone Usage (No Configuration Needed)
+### 1. Standalone Usage (No Configuration Needed) (WIP)
 
 Run instantly without modifying any user or system configuration:
 
-```sh
-nix run github:JMartJonesy/kickstart.nixvim
-```
-Or build it locally:
-```sh
-nix build github:JMartJonesy/kickstart.nixvim
-./result/bin/nvim
-```
 
 ### 2. NixOS Module
 1. Add kickstart.nxivim to your `flake.nix`:

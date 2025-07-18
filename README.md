@@ -2,8 +2,11 @@
 
 >**NOTE**
 > I have updated this repo to use a flake approach so that it can
-> easily be incorporated in any setup.
-> If you are looking for the previous implementation it can be found [here](https://github.com/JMartJonesy/kickstart.nixvim/tree/legacy)
+> easily be incorporated into any setup.
+>
+> I apologize that this change is not backwards compatible as nixvim standalone requires a specific folder structure. I have moved all plugins under the `/config` directory and have simplified the plugins directory structure. 
+>
+>If you are looking for the previous implementation it can be found [here](https://github.com/JMartJonesy/kickstart.nixvim/tree/legacy)
 
 ## Introduction
 
@@ -48,7 +51,7 @@ You can use this repo in four ways:
 ---
 ## Use-cases
 
-### 1. Standalone Usage (No Configuration Needed) (WIP)
+### 1. Standalone Usage (No Configuration Files Needed)
 
 Run instantly without modifying any user or system configuration:
 ```nix
@@ -121,12 +124,17 @@ so that you have your own copy that you can update and version control.
       cd ~
       git clone https://github.com/<YOUR-GITHUB-USERNAME>/kickstart.nixvim.git
       ```
-3. Update your flake.nix to refer to your local kickstart.nixvim repo
+3. a. If you are using kickstart.nixvim with your own flake then update your flake.nix to refer to your local kickstart.nixvim repo
 ```nix
 inputs.kickstart-nixvim.url = "path:<PATH_TO>/kickstart.nixvim";
 ```
-5. Rebuild your NixOS configuration
-6. Confirm your init.lua file has been created and loads without errors
+3. b. Or if you are running kickstart.nixvim standalone run in your cloned repo directory
+Note: For quick testing you can add any custom nixvim configurations into `/config/default.nix`
+```nix
+run build .
+./result/bin/nvim
+```
+4. a. If you are using kickstart.nixvim with your own flake confirm the `init.lua` file has been created and loads without errors
 ```sh
 nvim ~/.config/nvim/init.lua
 ``` 

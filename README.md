@@ -51,7 +51,14 @@ You can use this repo in four ways:
 ### 1. Standalone Usage (No Configuration Needed) (WIP)
 
 Run instantly without modifying any user or system configuration:
-
+```nix
+nix run . -- <FILE>
+```
+Or build your own runnable nvim that can be reused
+```nix
+nix build .
+./result/bin/nvim <FILE>
+```
 
 ### 2. NixOS Module
 1. Add kickstart.nxivim to your `flake.nix`:

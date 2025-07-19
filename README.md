@@ -1,11 +1,12 @@
 # kickstart.nixvim
 
 >**NOTE**
-> This repo is a WORK IN PROGRESS
->
 > I have updated this repo to use a flake approach so that it can
-> easily be incorporated in any setup.
-> If you are looking for the previous implementation it can be found [here](https://github.com/JMartJonesy/kickstart.nixvim/tree/legacy)
+> easily be incorporated into any setup.
+>
+> I apologize that this change is not backwards compatible as nixvim standalone requires a specific folder structure. I have moved all plugins under the `/config` directory and have simplified the plugins directory structure. The setting `have_nerd_font` has been renamed to `enable_nerds_fonts`
+>
+>If you are looking for the previous implementation it can be found [here](https://github.com/JMartJonesy/kickstart.nixvim/tree/legacy)
 
 ## Introduction
 
@@ -23,15 +24,14 @@ modular implementation. This means most plugins have their own .nix files that a
 
 # Installation
 
-This installation process assumes you understand the basics of importing and adding dependencies to your .nix configuration files.
+If not using standalone setup this installation process assumes you understand the basics of importing and adding dependencies to your .nix configuration files.
 
 ## Install External Dependencies
 
-- Basic utils: `git`, C Compiler (`gcc`)
-- [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
+- Basic utils: `git`
 - Clipboard tool (xclip/xsel/win32yank or other depending on platform)
 - A [Nerd Font](https://www.nerdfonts.com/): optional, provides various icons
-  - if you have it set `have_nerd_font` in `nixvim.nix` to true
+  - if you have it set `enable_nerd_fonts` in `nixvim.nix` to true
 - Language Dependencies:
   - If you want to write Typescript, you will need `npm`
   - If you want to write Golang, you will need `go`
@@ -51,21 +51,20 @@ You can use this repo in four ways:
 ---
 ## Use-cases
 
-### 1. Standalone Usage (No Configuration Needed)
+### 1. Standalone Usage (No Configuration Files Needed)
 
 Run instantly without modifying any user or system configuration:
-
-```sh
-nix run github:JMartJonesy/kickstart.nixvim
+```nix
+nix run github:JMartJonesy/kickstart.nixvim -- <FILE>
 ```
-Or build it locally:
-```sh
+Or build your own runnable nvim that can be reused
+```nix
 nix build github:JMartJonesy/kickstart.nixvim
-./result/bin/nvim
+./result/bin/nvim <FILE>
 ```
 
 ### 2. NixOS Module
-1. Add kickstart.nxivim to your `flake.nix`:
+1. Add kickstart.nixvim to your `flake.nix`:
 ```nix
 inputs.kickstart-nixvim.url = "github:JMartJonesy/kickstart.nixvim";
 ```
@@ -81,7 +80,7 @@ inputs.kickstart-nixvim.url = "github:JMartJonesy/kickstart.nixvim";
 ```
 
 ### 3. Home Manager Module
-1. Add kickstart.nxivim to your `flake.nix`:
+1. Add kickstart.nixvim to your `flake.nix`:
 ```nix
 inputs.kickstart-nixvim.url = "github:JMartJonesy/kickstart.nixvim";
 ```
@@ -125,12 +124,17 @@ so that you have your own copy that you can update and version control.
       cd ~
       git clone https://github.com/<YOUR-GITHUB-USERNAME>/kickstart.nixvim.git
       ```
-3. Update your flake.nix to refer to your local kickstart.nixvim repo
+3. a. If you are using kickstart.nixvim with your own flake then update your flake.nix to refer to your local kickstart.nixvim repo
 ```nix
 inputs.kickstart-nixvim.url = "path:<PATH_TO>/kickstart.nixvim";
 ```
-5. Rebuild your NixOS configuration
-6. Confirm your init.lua file has been created and loads without errors
+3. b. Or if you are running kickstart.nixvim standalone run in your cloned repo directory
+Note: For quick testing you can add any custom nixvim configurations into `/config/default.nix`
+```nix
+run build .
+./result/bin/nvim
+```
+4. a. If you are using kickstart.nixvim with your own flake confirm the `init.lua` file has been created and loads without errors
 ```sh
 nvim ~/.config/nvim/init.lua
 ``` 

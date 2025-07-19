@@ -152,7 +152,8 @@
         desc = "git [p]review hunk";
       };
     }
-    { # official gitsigns
+    {
+      # official gitsigns
       mode = "n";
       key = "<leader>hi";
       action.__raw = ''
@@ -200,7 +201,8 @@
         desc = "git [D]iff against last commit";
       };
     }
-    { # official gitsigns
+    {
+      # official gitsigns
       mode = "n";
       key = "<leader>hQ";
       action.__raw = ''
@@ -212,7 +214,8 @@
         desc = "git [Q]uickfix List (all)";
       };
     }
-    { # official gitsigns
+    {
+      # official gitsigns
       mode = "n";
       key = "<leader>hq";
       action.__raw = ''
@@ -251,7 +254,8 @@
         desc = "[T]oggle git show [d]eleted";
       };
     }
-    { # official gitsigns
+    {
+      # official gitsigns
       mode = "n";
       key = "<leader>tw";
       action.__raw = ''
@@ -264,8 +268,12 @@
       };
     }
     # Text object
-    { # official gitsigns
-      mode = [ "o" "x" ];
+    {
+      # official gitsigns
+      mode = [
+        "o"
+        "x"
+      ];
       key = "<leader>hh";
       # key = "<leader>ih"; # official gitsigns
       action.__raw = ''

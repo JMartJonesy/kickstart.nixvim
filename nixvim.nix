@@ -199,7 +199,6 @@ in
     updatetime = 250;
 
     # Decrease mapped sequence wait time
-    # Displays which-key popup sooner
     timeoutlen = 300;
 
     # Configure how new splits should be opened

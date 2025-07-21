@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # Dependencies
   #
   # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extrapackages
@@ -26,13 +27,17 @@
         end
       '';
       formatters_by_ft = {
-        lua = ["stylua"];
+        lua = [ "stylua" ];
         # Conform can also run multiple formatters sequentially
         # python = [ "isort "black" ];
         #
-        # You can use a sublist to tell conform to run *until* a formatter
-        # is found
-        # javascript = [ [ "prettierd" "prettier" ] ];
+        # You can use 'stop_after_first' to run the first available formatter from this list
+        #javascript = {
+        # __unkeyed-1 = "prettierd";
+        # __unkeyed-2 = "prettier";
+        # timeout_ms = 2000;
+        # stop_after_first = true;
+        #};
       };
     };
   };

@@ -26,7 +26,7 @@ in
     ./config/plugins/kickstart/telescope.nix
     ./config/plugins/kickstart/lsp.nix
     ./config/plugins/kickstart/conform.nix
-    ./config/plugins/kickstart/nvim-cmp.nix
+    ./config/plugins/kickstart/blink-cmp.nix
     ./config/plugins/kickstart/todo-comments.nix
     ./config/plugins/kickstart/mini.nix
     ./config/plugins/kickstart/treesitter.nix
@@ -165,7 +165,7 @@ in
   };
 
   # [[ Setting options ]]
-  # See `:help vim.opt`
+  # See `:help vim.o`
   # NOTE: You can change these options as you wish!
   #  For more options, you can see `:help option-list`
   # https://nix-community.github.io/nixvim/NeovimOptions/index.html#opts
@@ -329,14 +329,14 @@ in
   autoCmd = [
     # Highlight when yanking (copying) text
     #  Try it with `yap` in normal mode
-    #  See `:help vim.highlight.on_yank()`
+    #  See `:help vim.hl.on_yank()`
     {
       event = [ "TextYankPost" ];
       desc = "Highlight when yanking (copying) text";
       group = "kickstart-highlight-yank";
       callback.__raw = ''
         function()
-          vim.highlight.on_yank()
+          vim.hl.on_yank()
         end
       '';
     }

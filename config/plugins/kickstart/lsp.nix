@@ -1,13 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # Dependencies
   # { 'Bilal2453/luvit-meta', lazy = true },
   #
-  #
-  # Allows extra capabilities providied by nvim-cmp
-  # https://nix-community.github.io/nixvim/plugins/cmp-nvim-lsp.html
-  plugins.cmp-nvim-lsp = {
-    enable = true;
-  };
 
   # Useful status updates for LSP.
   # https://nix-community.github.io/nixvim/plugins/fidget/index.html
@@ -200,7 +195,10 @@
         # Execute a code action, usually your cursor needs to be on top of an error
         # or a suggestion from your LSP for this to activate.
         "<leader>ca" = {
-          mode = ["n" "x"];
+          mode = [
+            "n"
+            "x"
+          ];
           action = "code_action";
           desc = "LSP: [C]ode [A]ction";
         };
@@ -215,12 +213,10 @@
 
     # LSP servers and clients are able to communicate to each other what features they support.
     #  By default, Neovim doesn't support everything that is in the LSP specification.
-    #  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-    #  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-    # NOTE: This is done automatically by Nixvim when enabling cmp-nvim-lsp
+    # NOTE: This is done automatically by Nixvim when enabling blink.cmp
     #  Below is an example if you did want to add new capabilities
     #capabilities = ''
-    #  capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+    #  require('blink.cmp').get_lsp_capabilities()
     #'';
 
     # This function gets run when an LSP attaches to a particular buffer.

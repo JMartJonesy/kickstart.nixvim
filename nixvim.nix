@@ -282,6 +282,7 @@ in
     #  Use CTRL+<hjkl> to switch between windows
     #
     #  See `:help wincmd` for a list of all window commands
+    # NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
     {
       mode = "n";
       key = "<C-h>";

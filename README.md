@@ -131,7 +131,7 @@ inputs.kickstart-nixvim.url = "path:<PATH_TO>/kickstart.nixvim";
 3. b. Or if you are running kickstart.nixvim standalone run in your cloned repo directory
 Note: For quick testing you can add any custom nixvim configurations into `/config/default.nix`
 ```nix
-run build .
+nix build .
 ./result/bin/nvim
 ```
 4. a. If you are using kickstart.nixvim with your own flake confirm the `init.lua` file has been created and loads without errors

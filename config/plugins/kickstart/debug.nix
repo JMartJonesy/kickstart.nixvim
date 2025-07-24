@@ -137,7 +137,6 @@
 
   # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraconfiglua
   extraConfigLua = ''
-    -- TODO: I think this can be done in nixvim natively
     -- Change breakpoint icons
     -- vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
     -- vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })

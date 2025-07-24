@@ -10,16 +10,6 @@ let
 in
 {
   imports = [
-    # NOTE: The first thing you will want to do is uncommented on of the three imports below
-    # depending on which module you chose to use to install Nixvim.
-    #
-    # Uncomment if you are using the home-manager module
-    #inputs.nixvim.homeManagerModules.nixvim
-    # Uncomment if you are using the nixos module
-    #inputs.nixvim.nixosModules.nixvim
-    # Uncomment if you are using the nix-darwin module
-    #inputs.nixvim.nixDarwinModules.nixvim
-
     # Plugins
     ./config/plugins/kickstart/gitsigns.nix
     ./config/plugins/kickstart/which-key.nix
@@ -346,6 +336,44 @@ in
       '';
     }
   ];
+
+  diagnostic = {
+    settings = {
+      severity_sort = true;
+      float = {
+        border = "rounded";
+        source = "if_many";
+      };
+      underline = {
+        severity.__raw = ''vim.diagnostic.severity.ERROR'';
+      };
+      signs.__raw = ''
+        vim.g.have_nerd_font and {
+          text = {
+            [vim.diagnostic.severity.ERROR] = '󰅚 ',
+            [vim.diagnostic.severity.WARN] = '󰀪 ',
+            [vim.diagnostic.severity.INFO] = '󰋽 ',
+            [vim.diagnostic.severity.HINT] = '󰌶 ',
+          },
+        } or {}
+      '';
+      virtual_text = {
+        source = "if_many";
+        spacing = 2;
+        format.__raw = ''
+          function(diagnostic)
+            local diagnostic_message = {
+              [vim.diagnostic.severity.ERROR] = diagnostic.message,
+              [vim.diagnostic.severity.WARN] = diagnostic.message,
+              [vim.diagnostic.severity.INFO] = diagnostic.message,
+              [vim.diagnostic.severity.HINT] = diagnostic.message,
+            }
+            return diagnostic_message[diagnostic.severity]
+          end
+        '';
+      };
+    };
+  };
 
   plugins = {
     # Adds icons for plugins to utilize in ui

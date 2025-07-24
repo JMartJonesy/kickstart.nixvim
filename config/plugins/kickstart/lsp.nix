@@ -24,10 +24,12 @@
   plugins.lazydev = {
     enable = true; # autoEnableSources not enough
     settings = {
-      library = {
-        path = "\${3rd}/luv/library";
-        words = [ "vim%.uv" ];
-      };
+      library = [
+        {
+          path = "\${3rd}/luv/library";
+          words = [ "vim%.uv" ];
+        }
+      ];
     };
   };
 

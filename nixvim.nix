@@ -10,23 +10,13 @@ let
 in
 {
   imports = [
-    # NOTE: The first thing you will want to do is uncommented on of the three imports below
-    # depending on which module you chose to use to install Nixvim.
-    #
-    # Uncomment if you are using the home-manager module
-    #inputs.nixvim.homeManagerModules.nixvim
-    # Uncomment if you are using the nixos module
-    #inputs.nixvim.nixosModules.nixvim
-    # Uncomment if you are using the nix-darwin module
-    #inputs.nixvim.nixDarwinModules.nixvim
-
     # Plugins
     ./config/plugins/kickstart/gitsigns.nix
     ./config/plugins/kickstart/which-key.nix
     ./config/plugins/kickstart/telescope.nix
     ./config/plugins/kickstart/lsp.nix
     ./config/plugins/kickstart/conform.nix
-    ./config/plugins/kickstart/nvim-cmp.nix
+    ./config/plugins/kickstart/blink-cmp.nix
     ./config/plugins/kickstart/todo-comments.nix
     ./config/plugins/kickstart/mini.nix
     ./config/plugins/kickstart/treesitter.nix
@@ -139,6 +129,11 @@ in
         # Like many other themes, this one has different styles, and you could load
         # any other, such as 'storm', 'moon', or 'day'.
         style = "night";
+        styles = {
+          comments = {
+            italic = false; # Disable italics in comments
+          };
+        };
       };
     };
   };
@@ -170,7 +165,7 @@ in
   };
 
   # [[ Setting options ]]
-  # See `:help vim.opt`
+  # See `:help vim.o`
   # NOTE: You can change these options as you wish!
   #  For more options, you can see `:help option-list`
   # https://nix-community.github.io/nixvim/NeovimOptions/index.html#opts
@@ -204,7 +199,6 @@ in
     updatetime = 250;
 
     # Decrease mapped sequence wait time
-    # Displays which-key popup sooner
     timeoutlen = 300;
 
     # Configure how new splits should be opened
@@ -241,6 +235,7 @@ in
   # https://nix-community.github.io/nixvim/keymaps/index.html
   keymaps = [
     # Clear highlights on search when pressing <Esc> in normal mode
+    #  See `:help hlsearch`
     {
       mode = "n";
       key = "<Esc>";
@@ -334,18 +329,56 @@ in
   autoCmd = [
     # Highlight when yanking (copying) text
     #  Try it with `yap` in normal mode
-    #  See `:help vim.highlight.on_yank()`
+    #  See `:help vim.hl.on_yank()`
     {
       event = [ "TextYankPost" ];
       desc = "Highlight when yanking (copying) text";
       group = "kickstart-highlight-yank";
       callback.__raw = ''
         function()
-          vim.highlight.on_yank()
+          vim.hl.on_yank()
         end
       '';
     }
   ];
+
+  diagnostic = {
+    settings = {
+      severity_sort = true;
+      float = {
+        border = "rounded";
+        source = "if_many";
+      };
+      underline = {
+        severity.__raw = ''vim.diagnostic.severity.ERROR'';
+      };
+      signs.__raw = ''
+        vim.g.have_nerd_font and {
+          text = {
+            [vim.diagnostic.severity.ERROR] = '󰅚 ',
+            [vim.diagnostic.severity.WARN] = '󰀪 ',
+            [vim.diagnostic.severity.INFO] = '󰋽 ',
+            [vim.diagnostic.severity.HINT] = '󰌶 ',
+          },
+        } or {}
+      '';
+      virtual_text = {
+        source = "if_many";
+        spacing = 2;
+        format.__raw = ''
+          function(diagnostic)
+            local diagnostic_message = {
+              [vim.diagnostic.severity.ERROR] = diagnostic.message,
+              [vim.diagnostic.severity.WARN] = diagnostic.message,
+              [vim.diagnostic.severity.INFO] = diagnostic.message,
+              [vim.diagnostic.severity.HINT] = diagnostic.message,
+            }
+            return diagnostic_message[diagnostic.severity]
+          end
+        '';
+      };
+    };
+  };
 
   plugins = {
     # Adds icons for plugins to utilize in ui
@@ -353,7 +386,7 @@ in
 
     # Detect tabstop and shiftwidth automatically
     # https://nix-community.github.io/nixvim/plugins/sleuth/index.html
-    sleuth = {
+    guess-indent = {
       enable = true;
     };
   };

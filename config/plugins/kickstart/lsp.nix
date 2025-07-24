@@ -1,9 +1,5 @@
 { pkgs, ... }:
 {
-  # Dependencies
-  # { 'Bilal2453/luvit-meta', lazy = true },
-  #
-
   # Useful status updates for LSP.
   # https://nix-community.github.io/nixvim/plugins/fidget/index.html
   plugins.fidget = {
@@ -13,14 +9,25 @@
   # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraplugins
   extraPlugins = with pkgs.vimPlugins; [
     # NOTE: This is where you would add a vim plugin that is not implemented in Nixvim, also see extraConfigLuaPre below
-    #
-    # TODO: Add luvit-meta when Nixos package is added
   ];
 
   # https://nix-community.github.io/nixvim/NeovimOptions/autoGroups/index.html
   autoGroups = {
     "kickstart-lsp-attach" = {
       clear = true;
+    };
+  };
+
+  # A plugin that properly configures LuaLS for editing your Neovim config
+  #  by lazily updating your workspace libraries.
+  #  https://nix-community.github.io/nixvim/plugins/lazydev/index.html
+  plugins.lazydev = {
+    enable = true; # autoEnableSources not enough
+    settings = {
+      library = {
+        path = "\${3rd}/luv/library";
+        words = [ "vim%.uv" ];
+      };
     };
   };
 

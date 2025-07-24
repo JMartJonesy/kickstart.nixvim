@@ -9,10 +9,6 @@
 
   # Dependencies
   #
-  # A plugin that properly configures LuaLS for editing your Neovim config
-  #  by lazily updating your workspace libraries.
-  #  https://nix-community.github.io/nixvim/plugins/lazydev/index.html
-  plugins.lazydev.enable = true; # autoEnableSources not enough
   # A snippet engine for Neovim
   #  https://nix-community.github.io/nixvim/plugins/luasnip/index.html
   plugins.luasnip.enable = true; # autoEnableSources not enough

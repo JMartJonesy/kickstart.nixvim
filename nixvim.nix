@@ -5,7 +5,6 @@
   ...
 }:
 let
-  map = import ./lib/mkKeymap.nix { };
   enable_nerd_fonts = false;
 in
 {

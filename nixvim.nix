@@ -397,6 +397,7 @@ in
 
   # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraconfigluapost
   extraConfigLuaPost = ''
+    -- The line beneath this is called `modeline`. See `:help modeline`
     -- vim: ts=2 sts=2 sw=2 et
   '';
 }

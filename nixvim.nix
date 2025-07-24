@@ -390,9 +390,9 @@ in
     # NOTE: This is where you would add a vim plugin that is not implemented in Nixvim, also see extraConfigLuaPre below
   ];
 
-  # The line beneath this is called `modeline`. See `:help modeline`
   # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraconfigluapost
   extraConfigLuaPost = ''
+    -- The line beneath this is called `modeline`. See `:help modeline`
     -- vim: ts=2 sts=2 sw=2 et
   '';
 }

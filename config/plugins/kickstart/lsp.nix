@@ -6,11 +6,6 @@
     enable = true;
   };
 
-  # https://nix-community.github.io/nixvim/NeovimOptions/index.html#extraplugins
-  extraPlugins = with pkgs.vimPlugins; [
-    # NOTE: This is where you would add a vim plugin that is not implemented in Nixvim, also see extraConfigLuaPre below
-  ];
-
   # https://nix-community.github.io/nixvim/NeovimOptions/autoGroups/index.html
   autoGroups = {
     "kickstart-lsp-attach" = {

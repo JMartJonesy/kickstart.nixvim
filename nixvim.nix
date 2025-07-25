@@ -6,6 +6,7 @@
 }:
 let
   enable_nerd_fonts = true;
+  indentation = 4;
 in
 {
   imports = [
@@ -35,6 +36,7 @@ in
     #
     # NOTE: Configure your own plugins `see https://nix-community.github.io/nixvim/`
     # Add your plugins to ./config/plugins/custom and import them below
+    # ./config/plugins/custom/strudel.nix
   ];
 
   /*
@@ -227,6 +229,12 @@ in
 
     # See `:help hlsearch`
     hlsearch = true;
+
+    # Spacing
+    tabstop = indentation;
+    shiftwidth = indentation;
+    softtabstop = indentation;
+    expandtab = true;
   };
 
   # [[ Basic Keymaps ]]

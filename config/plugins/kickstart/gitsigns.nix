@@ -119,7 +119,7 @@
       key = "<leader>hu";
       action.__raw = ''
         function()
-          require('gitsigns').stage_hunk()
+          require('gitsigns').undo_stage_hunk()
         end
       '';
       options = {

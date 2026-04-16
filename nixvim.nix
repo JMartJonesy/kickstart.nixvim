@@ -1,12 +1,10 @@
 {
   pkgs,
-  lib,
-  config,
   ...
 }:
 let
   enable_nerd_fonts = true;
-  indentation = 4;
+  indentation = 2;
 in
 {
   imports = [
@@ -21,6 +19,7 @@ in
     ./config/plugins/kickstart/mini.nix
     ./config/plugins/kickstart/treesitter.nix
 
+    ./config/plugins/custom/opencode.nix
     ./config/plugins/custom/yazi.nix
 
     # NOTE: Add/Configure additional plugins for Kickstart.nixvim
@@ -235,6 +234,7 @@ in
     shiftwidth = indentation;
     softtabstop = indentation;
     expandtab = true;
+    smartindent = true;
   };
 
   # [[ Basic Keymaps ]]
@@ -357,7 +357,7 @@ in
         source = "if_many";
       };
       underline = {
-        severity.__raw = ''vim.diagnostic.severity.ERROR'';
+        severity.__raw = "vim.diagnostic.severity.ERROR";
       };
       signs.__raw = ''
         vim.g.have_nerd_font and {

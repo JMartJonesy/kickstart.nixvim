@@ -1,0 +1,5 @@
+{
+  plugins.opencode = {
+    enable = true;
+  };
+}

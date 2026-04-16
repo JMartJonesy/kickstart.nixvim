@@ -114,14 +114,20 @@
         };
       };
 
+      # HTML lsp
       html = {
         enable = true;
       };
 
+      # CSS lsp
       cssls = {
         enable = true;
       };
 
+      # Zig lsp
+      zls = {
+        enable = true;
+      };
     };
 
     keymaps = {
